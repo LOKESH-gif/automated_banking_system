@@ -1,0 +1,6 @@
+<h3>{{vm.title}}</h3>
+<ul>
+    <li ng-repeat="transaction in vm.transactions">
+        Transaction ID: {{transaction.transactionId}}, Amount: ${{transaction.amount}}, Type: {{transaction.type}}
+    </li>
+</ul>

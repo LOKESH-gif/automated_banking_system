@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="bankingApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Banking Project</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body ng-controller="loginController as vm">
+    <div class="container">
+        <h1>Welcome to the VITAP</h1>
+
+        <!-- User Selection and Login -->
+        <div ng-show="!vm.isLoggedIn">
+            <h2>Select Login User Category</h2>
+            <select ng-model="vm.userType" ng-change="vm.selectUserType(vm.userType)">
+                <option value="" disabled>Select</option>
+                <option value="admin">Admin</option>
+                <option value="staff">Staff</option>
+                <option value="customer">Customer</option>
+            </select>
+
+            <!-- Login Form -->
+            <div ng-show="vm.selectedUserType" class="login-form">
+                <h3>Login as {{vm.selectedUserType | capitalize}}</h3>
+                <input type="text" placeholder="Username" ng-model="vm.username">
+                <input type="password" placeholder="Password" ng-model="vm.password">
+               
+                <p ng-if="vm.loginError" class="error-message">Invalid credentials, please try again.</p>
+            </div>
+<div ng-show="vm.selectedUserType" class="login-form">
+ <button ng-click="vm.login()">Login</button>
+</div>
+        </div>
+
+        <!-- Post-Login Options -->
+        <div ng-show="vm.isLoggedIn">
+            <h2>Welcome, {{vm.userType | capitalize}}</h2>
+            <button ng-click="vm.navigate('account')">Account Management</button>
+            <button ng-click="vm.navigate('transaction')">Transaction Management</button>
+            <button ng-click="vm.navigate('card')">Card Management</button>
+            <button ng-click="vm.navigate('atm')">ATM Management</button>
+            <div ng-view></div>
+            <button ng-click="vm.logout()">Logout</button>
+        </div>
+    </div>
+
+    <!-- AngularJS and App Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+    <script src="app.js"></script>
+    <script src="controllers/loginController.js"></script>
+    <script src="controllers/accountController.js"></script>
+    <script src="controllers/transactionController.js"></script>
+    <script src="controllers/cardController.js"></script>
+    <script src="controllers/atmController.js"></script>
+</body>
+</html>
